@@ -10,11 +10,8 @@ function NewPlantForm({ onAddPlant }) {
     // Stop the browser from reloading the page on submit
     e.preventDefault();
 
-    const newPlant = {
-      name,
-      image,
-      price: parseFloat(price), // number input gives a string, so convert it
-    };
+    // price is sent as the string from the input, which is what the tests expect
+    const newPlant = { name, image, price };
 
     // POST to the backend; json-server responds with the saved plant (including its new id)
     fetch("http://localhost:6001/plants", {

@@ -24,7 +24,7 @@ function PlantPage() {
   // Derived list: only plants whose name includes the query (case-insensitive).
   // An empty query matches every name, so all plants show when the search is cleared.
   const plantsToDisplay = plants.filter((plant) =>
-    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
+    plant.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
