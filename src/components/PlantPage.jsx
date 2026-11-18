@@ -12,11 +12,16 @@ function PlantPage() {
     fetch("http://localhost:6001/plants")
       .then((r) => r.json())
       .then((plantData) => setPlants(plantData));
-  }, []); // empty dependency array = run only on initial load
+  }, []);
+
+  // Adds a newly created plant to state so it renders immediately
+  function handleAddPlant(newPlant) {
+    setPlants((plants) => [...plants, newPlant]);
+  }
 
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm onAddPlant={handleAddPlant} />
       <Search />
       <PlantList plants={plants} />
     </main>
