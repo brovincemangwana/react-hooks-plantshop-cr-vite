@@ -6,6 +6,8 @@ import Search from "./Search";
 function PlantPage() {
   // Holds every plant fetched from the backend
   const [plants, setPlants] = useState([]);
+  // Holds the current text typed into the search bar
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Fetch all plants once, when the component first mounts
   useEffect(() => {
@@ -19,11 +21,17 @@ function PlantPage() {
     setPlants((plants) => [...plants, newPlant]);
   }
 
+  // Derived list: only plants whose name includes the query (case-insensitive).
+  // An empty query matches every name, so all plants show when the search is cleared.
+  const plantsToDisplay = plants.filter((plant) =>
+    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <main>
       <NewPlantForm onAddPlant={handleAddPlant} />
-      <Search />
-      <PlantList plants={plants} />
+      <Search searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+      <PlantList plants={plantsToDisplay} />
     </main>
   );
 }
